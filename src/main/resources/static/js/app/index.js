@@ -74,10 +74,20 @@ btnSave && btnSave.addEventListener("click", () => {
             author: author,
             content: content,
         })
-    }).then(() => {
-        alert("글이 등록되었습니다.");
-        window.location.href = "/";
     })
+        .then(res => {
+            if (!res.ok) {
+                throw Error(res.status.toString());
+            }
+            return res.json();
+        })
+        .then((data) => {
+            alert("글이 등록되었습니다.");
+            window.location.href = "/";
+        })
+        .catch((error) => {
+            alert(error);
+        });
 });
 
 btnUpdate && btnUpdate.addEventListener("click", () => {
@@ -95,11 +105,12 @@ btnUpdate && btnUpdate.addEventListener("click", () => {
             title: title,
             content: content,
         })
-    })
-        .then(() => {
+    }).then(() => {
             alert("글이 수정되었습니다.");
             window.location.href = "/";
-        });
+    }).catch((error) => {
+        alert(error);
+    });
 });
 
 btnDelete && btnDelete.addEventListener("click", () => {
