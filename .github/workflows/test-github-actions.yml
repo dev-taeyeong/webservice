@@ -39,6 +39,7 @@ jobs:
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip ./deploy/
 
+      # S3에 업로드
       - name: S3 업로드
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
