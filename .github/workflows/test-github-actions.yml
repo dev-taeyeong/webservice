@@ -50,7 +50,7 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            ./webservice.zip s3://my-webservice
+            ./deploy/webservice.zip s3://my-webservice
 
       # Deploy
       - name: Deploy
