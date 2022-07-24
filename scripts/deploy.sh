@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPOSITORY=/home/ec2-user/app/deploy
-PROJECT_NAME=freelec-springboot2-webservice
+PROJECT_NAME=webservice
 
 echo "> Build 파일 복사"
 cp $REPOSITORY/zip/*.jar $REPOSITORY/
