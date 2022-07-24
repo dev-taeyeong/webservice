@@ -40,4 +40,4 @@ jobs:
           aws s3 cp \
           --recursive \
           --region ap-northeast-2 \
-          ./webservice.zip s3://my-service/
+          ./deploy/webservice.zip s3://my-service/
