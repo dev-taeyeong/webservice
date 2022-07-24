@@ -27,12 +27,10 @@ jobs:
 
       - name: zip 파일 생성
         run: |
-          mkdir -p before-deploy
-          cp appspec.yml before-deploy/
-          cp build/libs/*.jar before-deploy/
-          cd before-deploy && zip -r ./$GITHUB_SHA.zip *
-          cd ../ && mkdir -p deploy
-          mv before-deploy/$GITHUB_SHA.zip deploy/$GITHUB_SHA.zip
+          mkdir -p deploy
+          cp ./build/libs/*.jar ./deploy/
+          cp appspec.yml ./deploy/
+          zip -r -qq -j ./webservice.zip ./deploy
 
       - name: S3 업로드
         env:
@@ -42,4 +40,4 @@ jobs:
           aws s3 cp \
           --recursive \
           --region ap-northeast-2 \
-          /deploy/$GITHUB_SHA.zip s3://my-service/$GITHUB_SHA.zip
+          ./webservice.zip s3://my-service/
