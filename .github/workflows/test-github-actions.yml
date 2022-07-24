@@ -60,7 +60,8 @@ jobs:
         run:
           aws deploy create-deployment \
           --application-name webservice \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name webservice-group \
           --file-exists-behavior OVERWRITE \
-          --s3-location bucket=web-service,bundleType=zip,key=webservice.zip \
+          --s3-location bucket=my-webservice,bundleType=zip,key=webservice.zip \
           --region ap-northeast-2
