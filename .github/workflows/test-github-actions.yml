@@ -63,5 +63,5 @@ jobs:
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name webservice-group \
           --file-exists-behavior OVERWRITE \
-          --s3-location bucket=my-webservice,bundleType=zip,key=webservice.zip \
+          --s3-location bucket=my-webservice,bundleType=jar,key=webservice-0.0.1-SNAPSHOT.jar \
           --region ap-northeast-2
