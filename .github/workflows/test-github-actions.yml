@@ -62,5 +62,5 @@ jobs:
           --application-name webservice \
           --deployment-group-name webservice-group \
           --file-exists-behavior OVERWRITE \
-          --s3-location bucket=web-service,bundleType=zip,key=webservice-build.zip \
+          --s3-location bucket=web-service,bundleType=zip,key=webservice.zip \
           --region ap-northeast-2
