@@ -33,7 +33,15 @@ jobs:
       - name: Copy Jar
         run: cp ./build/libs/*.jar ./deploy/
 
+      # appspec.yml Copy
+      - name: Copy appspec
+        run: cp appspec.yml ./deploy/
+
       # 압축 파일 형태로 전달
+      - name: Make zip file
+        run: zip -r -qq -j ./webservice.zip ./deploy
+
+      # S3 Bucket으로 전달
       - name: Deliver to AWS S3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -42,4 +50,18 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            build s3://my-webservice
+            --acl private \
+            ./webservice.zip s3://my-webservice
+
+      # Deploy
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run:
+          aws deploy create-deployment \
+          --application-name webservice \
+          --deployment-group-name webservice-group \
+          --file-exists-behavior OVERWRITE \
+          --s3-location bucket=web-service,bundleType=zip,key=webservice-build.zip \
+          --region ap-northeast-2
