@@ -53,6 +53,5 @@ jobs:
         run: |
           aws deploy create-deployment \
           --application-name web-service \
-          --deployment-config-name CodeDeployDefault.OneAtATime \
           --deployment-group-name webservice-group \
           --s3-location bucket=my-webservice,bundleType=zip,key=$GITHUB_SHA.zip
