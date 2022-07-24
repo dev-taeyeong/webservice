@@ -25,12 +25,8 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - name: zip 파일 생성
-        run: |
-          mkdir -p deploy
-          cp ./build/libs/*.jar ./deploy/
-          cp appspec.yml ./deploy/
-          zip -r -qq -j ./webservice.zip ./deploy
+      - name: Make zip file
+        run: zip -r ./$GITHUB_SHA.zip .
 
       - name: S3 업로드
         env:
@@ -40,4 +36,4 @@ jobs:
           aws s3 cp \
           --recursive \
           --region ap-northeast-2 \
-          ./deploy/webservice.zip s3://my-service/
+          ./$GITHUB_SHA.zip s3://my-service/$GITHUB_SHA.zip
