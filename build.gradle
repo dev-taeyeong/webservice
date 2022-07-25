@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.taeyeong'
-version = '1.0.6-SNAPSHOT'
+version = '1.0.1-SNAPSHT-'+new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = '1.8'
 
 configurations {
